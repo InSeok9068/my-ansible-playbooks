@@ -1,0 +1,49 @@
+- name: Update package index
+  apt:
+    update_cache: yes
+
+- name: Install common package
+  apt:
+    name:
+      - curl
+      - git
+      - ufw
+      - nginx
+      - systemd-timesyncd
+      - logrotate
+      - certbot
+      - python3-certbot-nginx
+    state: present
+    update_cache: yes
+
+- name: Allow OpenSSH through UFW
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Allow Nginx Full through UFW
+  ufw:
+    rule: allow
+    name: Nginx Full
+
+- name: Enable UFW
+  command: ufw enable
+  ignore_errors: true
+
+- name: Enable and start Nginx
+  systemd:
+    name: nginx
+    enabled: yes
+    state: started
+
+- name: Enable and start systemd-timesyncd
+  systemd:
+    name: systemd-timesyncd
+    enabled: yes
+    state: started
+
+- name: Enable and start Certbot
+  systemd:
+    name: certbot.timer
+    enabled: yes
+    state: started
