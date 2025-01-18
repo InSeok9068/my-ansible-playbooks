@@ -7,14 +7,11 @@
 [Go Server]
 146.56.174.134
 
-[Ruby Server]
-127.0.0.1
-
 [Docker Server]
 146.56.177.250
 
 [Home WSL Server]
-127.0.0.1
+172.24.32.1
 
 [Company WSL Server]
 172.22.160.1
